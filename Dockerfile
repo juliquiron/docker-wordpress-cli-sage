@@ -65,5 +65,9 @@ RUN \
     npm install --global yarn && \
     npm install --global webpack
 
+# Adding extra useful tools
+RUN \
+    apk add git
+
 EXPOSE 22
 CMD ["/usr/sbin/sshd","-D"]
