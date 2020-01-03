@@ -67,7 +67,11 @@ RUN \
 
 # Adding extra useful tools
 RUN \
-    apk add git
+    apk add git && \
+    apk add subversion
+
+RUN apk add --update mysql mysql-client && rm -f /var/cache/apk/*
+COPY my.cnf /etc/mysql/my.cnf
 
 EXPOSE 22
 CMD ["/usr/sbin/sshd","-D"]
