@@ -2,10 +2,7 @@
 # https://github.com/bitroniq/docker-wordpress-cli-sage
 # https://hub.docker.com/r/bitroniq/docker-wordpress-cli-sage/
 
-# Official wordpress-cli image on steroids with SAGE (roots.io) dev
-# environment and SSH access
-
-# Author: mail@piotrkowalski.info
+# Official wordpress-cli image on steroids for timeular CI tests.
 
 FROM wordpress:cli
 
@@ -65,13 +62,13 @@ RUN \
     npm install --global yarn && \
     npm install --global webpack
 
+# Install and setup MySQL server.
+RUN apk add --update mysql-client 
+
 # Adding extra useful tools
 RUN \
     apk add git && \
     apk add subversion
-
-RUN apk add --update mysql mysql-client && rm -f /var/cache/apk/*
-COPY my.cnf /etc/mysql/my.cnf
 
 EXPOSE 22
 CMD ["/usr/sbin/sshd","-D"]
